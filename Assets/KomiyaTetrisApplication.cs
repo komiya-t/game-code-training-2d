@@ -1,59 +1,41 @@
 // 1. UnityEngineをUsingしてはならない
 // 2. 他の.csを足さずこのファイルのみで完結させること
+using App = KomiyaTetrisApplication;
+
 public class KomiyaTetrisApplication : UserApplication
 {
-	struct Vec
+    Mino[] minos =
     {
-		public int x;
-		public int y;
-
-		public Vec(int x, int y)
+        new Mino // S
 		{
-			this.x = x;
-			this.y = y;
-		}
-	}
-
-	struct Mino
-    {
-		public int size;
-		public int[] data;
-		public Vec pos;
-    }
-
-	Mino[] minos =
-	{
-		new Mino // S
-		{
-			size = 3,
-			data = new[] {
-				0, 0, 0,
-				1, 1, 0,
-				0, 1, 1
-			},
-		},
-		new Mino // I
-        {
-			size = 4,
-			data = new[]
-            {
-				0, 0, 0, 0,
-				1, 1, 1, 1,
-				0, 0, 0, 0,
-				0, 0, 0, 0,
+            size = 3,
+            data = new[] {
+                0, 0, 0,
+                1, 1, 0,
+                0, 1, 1
             },
         },
-	};
+        new Mino // I
+        {
+            size = 4,
+            data = new[]
+            {
+                0, 0, 0, 0,
+                1, 1, 1, 1,
+                0, 0, 0, 0,
+                0, 0, 0, 0,
+            },
+        },
+    };
 
+    IMachine machine; // 横着用
 
-	private IMachine machine;
+    // 毎フレーム(=1/60秒間隔で)呼ばれる
+    public override void Update(IMachine machine)
+    {
+        this.machine = machine;
 
-	// 毎フレーム(=1/60秒間隔で)呼ばれる
-	public override void Update(IMachine machine)
-	{
-		this.machine = machine;
-
-		machine.SetResolution(10, 20);
+        machine.SetResolution(10, 20);
 
 
         for (int x = 0; x < 10; x++)
@@ -64,41 +46,55 @@ public class KomiyaTetrisApplication : UserApplication
             }
         }
 
-		var s = minos[0];
-		s.pos = new Vec(5, 17);
-		DrawMino(s);
+        var s = minos[0];
+        s.pos = new Vec(5, 17);
+        s.Draw(this);
 
-		var i = minos[1];
-		i.pos = new Vec(5, 10);
-		DrawMino(i);
+        var i = minos[1];
+        i.pos = new Vec(5, 10);
+        i.Draw(this);
     }
 
-	void Draw(Vec pos)
+    void Draw(Vec pos)
     {
-		machine.Draw(pos.x, pos.y, 255, 0, 0);
+        machine.Draw(pos.x, pos.y, 255, 0, 0);
     }
 
-	void Draw(Vec startPos, int width, int[] data)
+    void Draw(Vec startPos, int width, int[] data)
     {
-		for (int idx = 0; idx < data.Length; idx++)
+        for (int idx = 0; idx < data.Length; idx++)
         {
-			int x = startPos.x + idx % width;
-			int y = startPos.y + idx / width;
+            int x = startPos.x + idx % width;
+            int y = startPos.y + idx / width;
 
-			if (data[idx] != 0)
+            if (data[idx] != 0)
             {
-				machine.Draw(x, y, 255, 0, 0);
+                machine.Draw(x, y, 255, 0, 0);
             }
         }
     }
 
-	void DrawMino(Mino mino)
-	{
-		var startPos = mino.pos;
-		int sizeHalf = mino.size / 2;
-		startPos.x -= sizeHalf;
-		startPos.y -= sizeHalf;
+    struct Vec
+    {
+        public int x;
+        public int y;
 
-		Draw(startPos, mino.size, mino.data);
-	}
+        public Vec(int x, int y)
+        {
+            this.x = x;
+            this.y = y;
+        }
+    }
+
+    struct Mino
+    {
+        public int size;
+        public int[] data;
+        public Vec pos;
+
+        public void Draw(App app)
+        {
+            app.Draw(pos, size, data);
+        }
+    }
 }

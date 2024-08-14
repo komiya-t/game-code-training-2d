@@ -2,15 +2,13 @@
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/KomiyaTetrisApplication.cs">
     <Files>
       <File FileName="Assets/KomiyaTetrisApplication.cs" Line="60" Column="10" />
-      <File FileName="Assets/IMachine.cs" Line="1" Column="1" />
+      <File FileName="Assets/IMachine.cs" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="game-code-training-2d" expanded="True">
-            <Node name="Assets" expanded="True">
-              <Node name="KomiyaTetrisApplication.cs" selected="True" />
-            </Node>
+            <Node name="Assets" expanded="True" selected="True" />
           </Node>
         </State>
       </Pad>
@@ -18,7 +16,7 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="97566a0a-7be8-4d2d-8bbe-f7f7c57aeeab" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="b10f866e-8d2e-4128-910e-a8825485695c" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

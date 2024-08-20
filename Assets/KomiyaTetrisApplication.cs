@@ -9,16 +9,17 @@ public class KomiyaTetrisApplication : UserApplication
         new Mino // S
 		{
             size = 3,
-            data = new[] {
+            shape = new byte[]
+            {
                 0, 0, 0,
                 1, 1, 0,
-                0, 1, 1
+                0, 1, 1,
             },
         },
         new Mino // I
         {
             size = 4,
-            data = new[]
+            shape = new byte[]
             {
                 0, 0, 0, 0,
                 1, 1, 1, 1,
@@ -60,7 +61,7 @@ public class KomiyaTetrisApplication : UserApplication
         machine.Draw(pos.x, pos.y, 255, 0, 0);
     }
 
-    void Draw(Vec startPos, int width, int[] data)
+    void Draw(Vec startPos, int width, byte[] data)
     {
         for (int idx = 0; idx < data.Length; idx++)
         {
@@ -89,12 +90,13 @@ public class KomiyaTetrisApplication : UserApplication
     struct Mino
     {
         public int size;
-        public int[] data;
+        public byte[] shape;
         public Vec pos;
+        public int rot;
 
         public void Draw(App app)
         {
-            app.Draw(pos, size, data);
+            app.Draw(pos, size, shape);
         }
     }
 }
